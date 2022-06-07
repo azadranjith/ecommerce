@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+from ctypes import cast
 import os
 from pathlib import Path
 
@@ -22,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o=b7a&ch$duaeq@@&-^j1**ijdym0n_5d0n_ljgl*=4g^q)9^='
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG',default = True,cast = bool) 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gacart-course-env.eba-gkbc8tft.us-west-2.elasticbeanstalk.com']
 
 
 # Application definition
@@ -157,15 +158,15 @@ MESSAGE_TAGS = {
 
 
 #smtp configuration
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = config('EMAIL_HOST')
 
-EMAIL_PORT = 587
+EMAIL_PORT = config('EMAIL_PORT',cast=int)
 
-EMAIL_HOST_USER = 'ranjithkanthapuram@gmail.com'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 
-EMAIL_HOST_PASSWORD = 'deepmind@1'      
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')      
 
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = config('EMAIL_USE_TLS',cast=bool)  
 
 
 
